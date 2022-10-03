@@ -22,22 +22,25 @@ public class Wallet {
     @GeneratedValue
     private long id;
 
-    @NotNull
+    @NotNull // Obrigatório preencher. Não pode ser vazio.
     private String name;
 
-    @NotNull
+    @NotNull // Obrigatório preencher. Pode ser 'outro'
     private char type;
 
-    @NotNull
+    // Pode ser nulo dependendo do tipo da conta
+    // Validação pelo tipo de conta aqui (futuramente)
     private int number;
 
-    @NotNull
+    // Pode ser nulo dependendo do tipo da conta
+    // Validação pelo tipo de conta aqui (futuramente)
     private int agency;
 
-    @NotNull
+    // Pode ser nulo dependendo do tipo da conta
+    // Validação pelo tipo de conta aqui (futuramente)
     private int bank;
 
-    @NotNull
+    @NotNull // Pode ser 0,00
     private Currency balance;
 
 }
