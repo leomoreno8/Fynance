@@ -30,6 +30,9 @@ public class User implements UserDetails {
     private String displayName;
 
     @NotNull
+    private String email;
+
+    @NotNull
     @Size(min = 6, max = 254)
     @Pattern(regexp = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d).*$")
     private String password;

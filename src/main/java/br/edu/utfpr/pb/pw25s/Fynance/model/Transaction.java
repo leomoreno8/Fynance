@@ -44,7 +44,6 @@ public class Transaction {
     @NotNull // Pode ser 'outros'
     private String category;
 
-
     @NotNull // Pode ser 0,00
     private Currency fees;
 
