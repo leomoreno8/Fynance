@@ -2,18 +2,25 @@ package br.edu.utfpr.pb.pw25s.Fynance.service;
 
 import br.edu.utfpr.pb.pw25s.Fynance.model.Transaction;
 import br.edu.utfpr.pb.pw25s.Fynance.repository.TransactionRepository;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
-public class TransactionService {
-    private final TransactionRepository transactionRepository;
+public interface TransactionService {
+    Transaction save(Transaction transaction);
 
-    public TransactionService(TransactionRepository transactionRepository) {
+    Transaction findOne(Long id);
 
-        this.transactionRepository = transactionRepository;
-    }
+    List<Transaction> findAll();
 
-    public Transaction save(Transaction transaction) {
-        return transactionRepository.save(transaction);
-    }
+    Page<Transaction> findAll(Pageable pageable);
+
+    Long count();
+
+    Boolean exists(Long id);
+
+    void delete(Long id);
 }
