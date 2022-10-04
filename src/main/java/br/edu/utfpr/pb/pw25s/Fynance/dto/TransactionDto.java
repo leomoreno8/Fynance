@@ -12,10 +12,10 @@ public class TransactionDto {
 
     private Long id;
 
-    @NotNull // Obrigatório preencher. Não pode ser vazio.
+    @NotNull
     private String name;
 
-    @NotNull // Tem que conectar com uma Wallet (Conta) aqui. Salvará o ID aqui. Essa relação será feito por Services.
+    @NotNull
     private Long idWallet;
 
     @NotNull
@@ -24,17 +24,16 @@ public class TransactionDto {
     @NotNull
     private Currency valueTransaction;
 
-    @NotNull // E = Entrada ---- S = Saída
-    // Validação de só poder E ou S aqui futuramente
+    @NotNull
     private char ES;
 
-    @NotNull // Pode ser ''
+    @NotNull
     private String description;
 
-    @NotNull // Pode ser 'outros'
+    @NotNull
     private String category;
 
-    @NotNull // Pode ser 0,00
+    @NotNull
     private Currency fees;
 
     @NotNull

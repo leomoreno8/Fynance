@@ -9,58 +9,23 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.AuthenticationEntryPoint;
 import org.springframework.security.web.SecurityFilterChain;
 
-@EnableWebSecurity
 @Configuration
-public class WebSecurity {
+public class WebSecurity extends WebSecurityConfigurerAdapter {
 
-    private final AuthService authService;
-    private final AuthenticationEntryPoint authenticationEntryPoint;
+    @Override
+    protected void configure(HttpSecurity http) throws Exception {
+        http.authorizeRequests()
+                .antMatchers("/").permitAll()
+                .antMatchers("/h2-console/**").permitAll();
 
-    public WebSecurity(AuthService authService,
-                       AuthenticationEntryPoint authenticationEntryPoint) {
-        this.authService = authService;
-        this.authenticationEntryPoint = authenticationEntryPoint;
-    }
-
-
-    @Bean
-    @SneakyThrows
-    public SecurityFilterChain filterChain(HttpSecurity http) {
-        // authenticationManager -> responsável pela autenticação dos usuários
-        AuthenticationManagerBuilder authenticationManagerBuilder =
-                http.getSharedObject(AuthenticationManagerBuilder.class);
-        authenticationManagerBuilder.userDetailsService(authService)
-                .passwordEncoder( passwordEncoder() );
-        AuthenticationManager authenticationManager = authenticationManagerBuilder.build();
-
-        http.csrf().disable()
-                .exceptionHandling()
-                .authenticationEntryPoint(authenticationEntryPoint)
-                .and()
-                .authorizeRequests()
-
-                .antMatchers(HttpMethod.POST, "/users/**").permitAll()
-                .antMatchers( "/error/**").permitAll()
-                .anyRequest().authenticated()
-                .and()
-                .authenticationManager(authenticationManager)
-                //Filtro da Autenticação
-                .addFilter(new JWTAuthenticationFilter(authenticationManager, authService) )
-                //Filtro da Autorizaçao
-                .addFilter(new JWTAuthorizationFilter(authenticationManager, authService) )
-                .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
-
-        return http.build();
-    }
-
-    @Bean
-    public PasswordEncoder passwordEncoder() {
-        return new BCryptPasswordEncoder();
+        http.csrf().disable();
+        http.headers().frameOptions().disable();
     }
 }
