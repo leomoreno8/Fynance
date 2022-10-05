@@ -1,11 +1,8 @@
 package br.edu.utfpr.pb.pw25s.Fynance;
 
-import br.edu.utfpr.pb.pw25s.Fynance.error.ApiError;
 import br.edu.utfpr.pb.pw25s.Fynance.model.User;
 import br.edu.utfpr.pb.pw25s.Fynance.model.Wallet;
-import br.edu.utfpr.pb.pw25s.Fynance.repository.UserRepository;
 import br.edu.utfpr.pb.pw25s.Fynance.repository.WalletRepository;
-import br.edu.utfpr.pb.pw25s.Fynance.utils.GenericResponse;
 import org.junit.jupiter.api.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -14,12 +11,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.test.context.ActiveProfiles;
 
-import java.util.List;
-import java.util.Map;
-import java.util.stream.Collectors;
-import java.util.stream.IntStream;
-
-import static org.assertj.core.api.Assertions.as;
 import static org.assertj.core.api.Assertions.assertThat;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
