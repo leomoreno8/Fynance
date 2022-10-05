@@ -2,7 +2,9 @@ package br.edu.utfpr.pb.pw25s.Fynance;
 
 import br.edu.utfpr.pb.pw25s.Fynance.error.ApiError;
 import br.edu.utfpr.pb.pw25s.Fynance.model.User;
+import br.edu.utfpr.pb.pw25s.Fynance.model.Wallet;
 import br.edu.utfpr.pb.pw25s.Fynance.repository.UserRepository;
+import br.edu.utfpr.pb.pw25s.Fynance.repository.WalletRepository;
 import br.edu.utfpr.pb.pw25s.Fynance.utils.GenericResponse;
 import org.junit.jupiter.api.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,152 +29,38 @@ public class WalletControllerTest {
     @Autowired
     TestRestTemplate testRestTemplate;
     @Autowired
-    UserRepository userRepository;
+    WalletRepository walletRepository;
 
     @BeforeEach()
     private void cleanup() {
-        userRepository.deleteAll();
+        walletRepository.deleteAll();
         testRestTemplate.getRestTemplate().getInterceptors().clear();
     }
 
-    // methodName_condition_expectedBehaviour
     @Test
-    public void postUser_whenUserIsValid_receiveOk() {
-        User user = createValidUser();
+    public void postWallet_receiveOk() {
+        Wallet wallet = createValidWallet();
 
         ResponseEntity<Object> response =
-                testRestTemplate.postForEntity("/users", user, Object.class);
+                testRestTemplate.postForEntity("/wallets", wallet, Object.class);
 
-        assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
+        assertThat(response.getStatusCode()).isEqualTo(HttpStatus.CREATED);
     }
 
-    @Test
-    public void postUser_whenUserIsValid_userSavedToDatabase() {
-        User user = createValidUser();
+    private Wallet createValidWallet() {
 
-        ResponseEntity<Object> response =
-                testRestTemplate.postForEntity("/users", user, Object.class);
-        assertThat( userRepository.count() ).isEqualTo(1);
-    }
-
-    @Test
-    public void postUser_whenUserIsValid_receiveSuccessMessage() {
-        User user = createValidUser();
-
-        ResponseEntity<GenericResponse> response =
-                testRestTemplate.postForEntity("/users", user, GenericResponse.class);
-        assertThat( response.getBody().getMessage() ).isNotNull();
-    }
-
-    @Test
-    @DisplayName("Post user when User is valid password is hashed in database")
-    public void postUser_whenUserIsValid_passwordIsHashedInDatabase() {
-        User user = createValidUser();
-        testRestTemplate.postForEntity("/users", user, Object.class);
-
-        List<User> userList = userRepository.findAll();
-        User userDB = userList.get(0);
-        assertThat(userDB.getPassword()).isNotEqualTo(user.getPassword());
-    }
-
-    @Test
-    public void postUser_whenUserHasNullUsername_receiveBadRequest() {
-        User user = createValidUser();
-        user.setUsername(null);
-        ResponseEntity<Object> response =
-                testRestTemplate.postForEntity("/users", user, Object.class);
-        assertThat(response.getStatusCode()).isEqualTo(HttpStatus.BAD_REQUEST);
-    }
-
-    @Test
-    public void postUser_whenUserHasNullPassword_receiveBadRequest() {
-        User user = createValidUser();
-        user.setPassword(null);
-        ResponseEntity<Object> response =
-                testRestTemplate.postForEntity("/users", user, Object.class);
-        assertThat(response.getStatusCode()).isEqualTo(HttpStatus.BAD_REQUEST);
-    }
-
-    @Test
-    public void postUser_whenUserWithSizeLessThanRequired_receiveBadRequest() {
-        User user = createValidUser();
-        user.setUsername("abc");
-        ResponseEntity<Object> response =
-                testRestTemplate.postForEntity("/users", user, Object.class);
-        assertThat(response.getStatusCode()).isEqualTo(HttpStatus.BAD_REQUEST);
-    }
-
-    @Test
-    public void postUser_whenUsernameSizeExceedsLengthLimit_receiveBadRequest() {
-        User user = createValidUser();
-        user.setUsername(
-                IntStream.rangeClosed(1, 256).mapToObj(x -> "x")
-                        .collect(Collectors.joining())
-        );
-        ResponseEntity<Object> response =
-                testRestTemplate.postForEntity("/users", user, Object.class);
-        assertThat(response.getStatusCode()).isEqualTo(HttpStatus.BAD_REQUEST);
-    }
-
-    @Test
-    public void postUser_whenPasswordPatternNotMatch_receiveBadRequest() {
-        User user = createValidUser();
-        user.setPassword("password");
-        ResponseEntity<Object> response =
-                testRestTemplate.postForEntity("/users", user, Object.class);
-        assertThat(response.getStatusCode()).isEqualTo(HttpStatus.BAD_REQUEST);
-    }
-
-    @Test
-    public void postUser_whenUserIsInvalid_receiveApiError() {
-        User user = new User();
-        ResponseEntity<ApiError> response =
-                testRestTemplate.postForEntity("/users", user, ApiError.class);
-
-        assertThat(response.getBody().getUrl()).isEqualTo("/users");
-    }
-
-    @Test
-    public void postUser_whenUserIsInvalid_receiveApiErrorWithValidationErrors() {
-        User user = new User();
-        ResponseEntity<ApiError> response =
-                testRestTemplate.postForEntity("/users", user, ApiError.class);
-
-        assertThat(response.getBody().getValidationErrors().size()
-        ).isEqualTo(4);
-    }
-
-    @Test
-    public void postUser_whenUserIsInvalid_receiveMessageOfNullUsername() {
-        User user = new User();
-        ResponseEntity<ApiError> response =
-                testRestTemplate.postForEntity("/users", user, ApiError.class);
-
-        Map<String, String> validationErrors = response.getBody().getValidationErrors();
-
-        assertThat(validationErrors.get("username"))
-                .isEqualTo("O 'usuário' não pode ser nulo");
-    }
-
-    @Test
-    public void postUser_whenAnotherUserHasSameUsername_receiveBadRequest() {
-        userRepository.save(createValidUser());
-        User user = createValidUser();
-        ResponseEntity<Object> response =
-                testRestTemplate.postForEntity("/users", user, Object.class);
-        assertThat(response.getStatusCode())
-                .isEqualTo(HttpStatus.BAD_REQUEST);
-    }
-
-
-
-    private User createValidUser() {
         User user = new User();
         user.setUsername("test-user");
         user.setEmail("test@test.com");
         user.setDisplayName("test-dislpay");
         user.setPassword("P4ssword");
 
-        return user;
+        Wallet wallet = new Wallet();
+        wallet.setName("Viagem pro Canada");
+        wallet.setBalance(1000.00);
+        wallet.setType("Investimento");
+        wallet.setUser(user);
+
+        return wallet;
     }
 }

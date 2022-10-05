@@ -32,12 +32,12 @@ public class Wallet {
     private String name;
 
     @NotNull // Dono da carteira
-    @ManyToOne
+    @ManyToOne(cascade=CascadeType.PERSIST)
     @JoinColumn(name = "user_id")
     private User user;
 
     @NotNull // Obrigatório preencher. Pode ser 'outro'
-    private char type;
+    private String type;
 
     // Pode ser nulo dependendo do tipo da conta
     // Validação pelo tipo de conta aqui (futuramente)

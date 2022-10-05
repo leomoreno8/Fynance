@@ -14,10 +14,10 @@ public class WalletDto {
     private String name;
 
     @NotNull
-    private UserDto userId;
+    private UserDto user;
 
     @NotNull
-    private char type;
+    private String type;
 
     private int number;
 
