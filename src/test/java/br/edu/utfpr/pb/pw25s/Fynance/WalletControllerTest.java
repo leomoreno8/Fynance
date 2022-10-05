@@ -23,13 +23,13 @@ public class WalletControllerTest {
     WalletRepository walletRepository;
 
     @BeforeEach()
-    public void cleanup() {
+    private void cleanup() {
         walletRepository.deleteAll();
         testRestTemplate.getRestTemplate().getInterceptors().clear();
     }
 
     @Test
-    public void postWallet_receiveOk() {
+    public void postWallet_receiveCreated() {
         Wallet wallet = createValidWallet();
 
         ResponseEntity<Object> response =
