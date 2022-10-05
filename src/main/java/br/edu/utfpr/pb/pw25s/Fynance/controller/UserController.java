@@ -16,10 +16,16 @@ public class UserController {
         this.userService = userService;
     }
 
-    @PostMapping
+    @PostMapping("save")
     GenericResponse createUser(@RequestBody @Valid User user) {
         userService.save(user);
         return new GenericResponse("Registro salvo");
+    }
+
+    @PostMapping("update/{id}")
+    GenericResponse updateUser(@PathVariable Long id, @RequestBody @Valid User user) {
+        userService.update(id, user);
+        return new GenericResponse("Registro atualizado");
     }
 
     @GetMapping

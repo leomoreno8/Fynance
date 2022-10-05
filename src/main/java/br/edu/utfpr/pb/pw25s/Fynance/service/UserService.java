@@ -20,4 +20,15 @@ public class UserService {
         user.setPassword( passwordEncoder.encode(user.getPassword()));
         return userRepository.save(user);
     }
+
+    public User update(Long id, User user) {
+        User userToUpdate = userRepository.getOne(id);
+        userToUpdate.setDisplayName(user.getDisplayName());
+        userToUpdate.setUsername(user.getUsername());
+        userToUpdate.setEmail(user.getEmail());
+        userToUpdate.setPassword( passwordEncoder.encode(user.getPassword()));
+        userRepository.save(userToUpdate);
+
+        return userRepository.save(userToUpdate);
+    }
 }

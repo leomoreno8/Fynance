@@ -11,8 +11,8 @@ public class TransactionServiceImpl extends CrudServiceImpl<Transaction, Long>
     private TransactionRepository transactionRepository;
 
     public TransactionServiceImpl(TransactionRepository transactionRepository) {
-            this.transactionRepository = transactionRepository;
-        }
+        this.transactionRepository = transactionRepository;
+    }
 
         @Override
         protected JpaRepository<Transaction, Long> getRepository() {

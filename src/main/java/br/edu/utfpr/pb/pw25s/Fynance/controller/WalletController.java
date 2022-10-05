@@ -29,9 +29,20 @@ public class WalletController {
         this.modelMapper = modelMapper;
     }
 
-    @PostMapping
+    @PostMapping("save")
     public ResponseEntity<WalletDto> save(@RequestBody @Valid WalletDto walletDto) {
         Wallet wallet = walletService.save(
+                convertDtoToEntity(walletDto));
+        URI location = ServletUriComponentsBuilder.fromCurrentRequest()
+                .path("/{id}")
+                .buildAndExpand(wallet.getId()).toUri();
+
+        return ResponseEntity.created(location).body(convertEntityToDto(wallet));
+    }
+
+    @PostMapping("update/{id}")
+    public ResponseEntity<WalletDto> updateWallet(@RequestBody @Valid WalletDto walletDto) {
+        Wallet wallet = walletService.update(
                 convertDtoToEntity(walletDto));
         URI location = ServletUriComponentsBuilder.fromCurrentRequest()
                 .path("/{id}")
@@ -70,7 +81,7 @@ public class WalletController {
 
     }
 
-    @PutMapping
+    @PutMapping("save")
     public ResponseEntity<WalletDto> update(@RequestBody @Valid WalletDto walletDto) {
         Wallet wallet = walletService.save(
                 convertDtoToEntity(walletDto));
@@ -92,8 +103,6 @@ public class WalletController {
     public void delete(@PathVariable Long id) {
         walletService.delete(id);
     }
-
-
 
 
     private Wallet convertDtoToEntity(WalletDto walletDto) {

@@ -24,6 +24,12 @@ public class WalletServiceImpl implements WalletService {
     }
 
     @Override
+    public Wallet update(Wallet wallet) {
+        wallet.setName(wallet.getName());
+        return walletRepository.save(wallet);
+    }
+
+    @Override
     public Wallet findOne(Long id) {
         return walletRepository.findById(id).orElse(null);
     }

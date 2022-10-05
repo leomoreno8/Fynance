@@ -11,6 +11,8 @@ import java.util.List;
 public interface WalletService {
     Wallet save(Wallet wallet);
 
+    Wallet update(Wallet wallet);
+
     Wallet findOne(Long id);
 
     List<Wallet> findAll();
