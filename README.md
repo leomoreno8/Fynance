@@ -12,7 +12,7 @@
 - Email
 - password (hash)
 
-# CONTA / CARTEIRA
+# WALLET
 - id
 - nome
 - tipo (Corrente/Poupança/Investimento/Salário/Etc)
@@ -23,7 +23,7 @@
 - userId
 
 
-# MOVIMENTAÇÃO
+# TRANSACTION
 - ID (da movimentação)
 - CONTA (id da conta)
 - DataMovimentacao
