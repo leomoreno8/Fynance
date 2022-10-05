@@ -11,7 +11,6 @@
 - displayName
 - Email
 - password (hash)
-- CONTAS[]
 
 # CONTA / CARTEIRA
 - id
@@ -21,6 +20,7 @@
 - agência
 - banco
 - saldo
+- userId
 
 
 # MOVIMENTAÇÃO
