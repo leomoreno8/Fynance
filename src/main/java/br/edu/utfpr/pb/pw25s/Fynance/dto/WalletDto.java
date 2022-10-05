@@ -23,6 +23,6 @@ public class WalletDto {
     private int bank;
 
     @NotNull // Pode ser 0,00
-    private Currency balance;
+    private Double balance;
 
 }

@@ -14,25 +14,27 @@ import java.util.Collection;
 import java.util.Currency;
 import java.util.Date;
 
+@Entity
 @Data
-@Entity(name = "tb_transaction")
-
 public class Transaction {
+
     @Id
-    @GeneratedValue
-    private long id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
     @NotNull // Obrigatório preencher. Não pode ser vazio.
     private String name;
 
-    @NotNull // Tem que conectar com uma Wallet (Conta) aqui. Salvará o ID aqui. Essa relação será feito por Services.
-    private long idWallet;
+    @NotNull // Carteira que foi feita a transação
+    @ManyToOne
+    @JoinColumn(name = "wallet_id")
+    private Wallet wallet;
 
     @NotNull
     private Date dateTransaction;
 
     @NotNull
-    private Currency valueTransaction;
+    private Double valueTransaction;
 
     @NotNull // E = Entrada ---- S = Saída
     // Validação de só poder E ou S aqui futuramente
@@ -45,9 +47,9 @@ public class Transaction {
     private String category;
 
     @NotNull // Pode ser 0,00
-    private Currency fees;
+    private Double fees;
 
     @NotNull
-    private Currency total;
+    private Double total;
 
 }

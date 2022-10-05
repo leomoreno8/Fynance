@@ -26,13 +26,13 @@ public abstract class CrudController<T, D, ID extends Serializable> {
         this.typeDtoClass = typeDtoClass;
     }
 
-    @GetMapping // https://localhost/categories.. /products... etc
+    @GetMapping
     public ResponseEntity<List<D>> findAll() {
         return ResponseEntity.ok(getService().findAll().stream()
                 .map(this::convertToDto)
                 .collect(Collectors.toList()));
     }
-    @GetMapping("page") // https://localhost/categories?page=1&size=10&order=name&asc=true
+    @GetMapping("page")
     public ResponseEntity<Page<D>> findAll(@RequestParam int page,
                                            @RequestParam int size,
                                            @RequestParam(required = false) String order,

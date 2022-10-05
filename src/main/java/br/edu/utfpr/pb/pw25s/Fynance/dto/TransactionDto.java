@@ -1,6 +1,6 @@
 package br.edu.utfpr.pb.pw25s.Fynance.dto;
 
-import lombok.Data;
+import lombok.*;
 
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -8,6 +8,10 @@ import java.util.Currency;
 import java.util.Date;
 
 @Data
+@NoArgsConstructor
+@AllArgsConstructor
+@EqualsAndHashCode(of = {"id"})
+@Builder
 public class TransactionDto {
 
     private Long id;
@@ -16,13 +20,13 @@ public class TransactionDto {
     private String name;
 
     @NotNull
-    private Long idWallet;
+    private WalletDto wallet;
 
     @NotNull
     private Date dateTransaction;
 
     @NotNull
-    private Currency valueTransaction;
+    private Double valueTransaction;
 
     @NotNull
     private char ES;
@@ -34,8 +38,8 @@ public class TransactionDto {
     private String category;
 
     @NotNull
-    private Currency fees;
+    private Double fees;
 
     @NotNull
-    private Currency total;
+    private Double total;
 }

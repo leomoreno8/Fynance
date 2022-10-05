@@ -8,19 +8,6 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-@Service
-public interface TransactionService {
-    Transaction save(Transaction transaction);
+public interface TransactionService extends CrudService<Transaction, Long> {
 
-    Transaction findOne(Long id);
-
-    List<Transaction> findAll();
-
-    Page<Transaction> findAll(Pageable pageable);
-
-    Long count();
-
-    Boolean exists(Long id);
-
-    void delete(Long id);
 }

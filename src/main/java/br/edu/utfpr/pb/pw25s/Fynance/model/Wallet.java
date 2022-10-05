@@ -2,7 +2,10 @@ package br.edu.utfpr.pb.pw25s.Fynance.model;
 
 import br.edu.utfpr.pb.pw25s.Fynance.validation.UniqueUsername;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.AuthorityUtils;
 //import org.springframework.security.core.userdetails.UserDetails;
@@ -15,12 +18,15 @@ import java.util.Collection;
 import java.util.Currency;
 
 @Data
-@Entity(name = "tb_wallet")
-
+@Entity
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class Wallet {
+
     @Id
-    @GeneratedValue
-    private long id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
     @NotNull // Obrigatório preencher. Não pode ser vazio.
     private String name;
@@ -41,6 +47,6 @@ public class Wallet {
     private int bank;
 
     @NotNull // Pode ser 0,00
-    private Currency balance;
+    private Double balance;
 
 }
