@@ -31,6 +31,11 @@ public class Wallet {
     @NotNull // Obrigatório preencher. Não pode ser vazio.
     private String name;
 
+    @NotNull // Dono da carteira
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User user;
+
     @NotNull // Obrigatório preencher. Pode ser 'outro'
     private char type;
 

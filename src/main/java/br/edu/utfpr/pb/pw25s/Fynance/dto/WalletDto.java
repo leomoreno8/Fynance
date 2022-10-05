@@ -14,6 +14,9 @@ public class WalletDto {
     private String name;
 
     @NotNull
+    private UserDto userId;
+
+    @NotNull
     private char type;
 
     private int number;
