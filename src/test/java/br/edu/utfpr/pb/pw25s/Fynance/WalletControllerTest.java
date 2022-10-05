@@ -23,7 +23,7 @@ public class WalletControllerTest {
     WalletRepository walletRepository;
 
     @BeforeEach()
-    private void cleanup() {
+    public void cleanup() {
         walletRepository.deleteAll();
         testRestTemplate.getRestTemplate().getInterceptors().clear();
     }
