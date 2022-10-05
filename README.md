@@ -9,6 +9,7 @@
 - id
 - username
 - displayName
+- Email
 - password (hash)
 - CONTAS[]
 
