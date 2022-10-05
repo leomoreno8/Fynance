@@ -3,8 +3,6 @@ package br.edu.utfpr.pb.pw25s.Fynance.dto;
 import lombok.*;
 
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
-import java.util.Currency;
 import java.util.Date;
 
 @Data

@@ -1,19 +1,11 @@
 package br.edu.utfpr.pb.pw25s.Fynance.controller;
 
-import br.edu.utfpr.pb.pw25s.Fynance.error.ApiError;
 import br.edu.utfpr.pb.pw25s.Fynance.model.User;
 import br.edu.utfpr.pb.pw25s.Fynance.service.UserService;
 import br.edu.utfpr.pb.pw25s.Fynance.utils.GenericResponse;
-import org.springframework.http.HttpStatus;
-import org.springframework.validation.BindingResult;
-import org.springframework.validation.FieldError;
-import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.*;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
-import java.util.HashMap;
-import java.util.Map;
 
 @RestController
 @RequestMapping("users")

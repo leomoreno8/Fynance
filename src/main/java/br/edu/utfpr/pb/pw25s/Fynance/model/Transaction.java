@@ -1,17 +1,8 @@
 package br.edu.utfpr.pb.pw25s.Fynance.model;
 
-//import br.edu.utfpr.pb.pw25s.Fynance.validation.UniqueUsername;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.AuthorityUtils;
-//import org.springframework.security.core.userdetails.UserDetails;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Pattern;
-import javax.validation.constraints.Size;
-import java.util.Collection;
-import java.util.Currency;
 import java.util.Date;
 
 @Entity
