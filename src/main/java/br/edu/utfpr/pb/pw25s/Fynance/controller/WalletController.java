@@ -1,8 +1,10 @@
 package br.edu.utfpr.pb.pw25s.Fynance.controller;
 
 import br.edu.utfpr.pb.pw25s.Fynance.dto.WalletDto;
+import br.edu.utfpr.pb.pw25s.Fynance.model.User;
 import br.edu.utfpr.pb.pw25s.Fynance.model.Wallet;
 import br.edu.utfpr.pb.pw25s.Fynance.service.WalletService;
+import br.edu.utfpr.pb.pw25s.Fynance.utils.GenericResponse;
 import org.modelmapper.ModelMapper;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -41,14 +43,9 @@ public class WalletController {
     }
 
     @PostMapping("update/{id}")
-    public ResponseEntity<WalletDto> updateWallet(@RequestBody @Valid WalletDto walletDto) {
-        Wallet wallet = walletService.update(
-                convertDtoToEntity(walletDto));
-        URI location = ServletUriComponentsBuilder.fromCurrentRequest()
-                .path("/{id}")
-                .buildAndExpand(wallet.getId()).toUri();
-
-        return ResponseEntity.created(location).body(convertEntityToDto(wallet));
+    GenericResponse updateWallet(@PathVariable Long id, @RequestBody @Valid Wallet wallet) {
+        walletService.update(id, wallet);
+        return new GenericResponse("Carteira atualizado");
     }
 
     @GetMapping("{id}") // http://localhost:8080/wallets/1
