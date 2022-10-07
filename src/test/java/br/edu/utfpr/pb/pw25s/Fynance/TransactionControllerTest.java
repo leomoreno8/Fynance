@@ -5,6 +5,7 @@ import br.edu.utfpr.pb.pw25s.Fynance.model.Transaction;
 import br.edu.utfpr.pb.pw25s.Fynance.model.User;
 import br.edu.utfpr.pb.pw25s.Fynance.model.Wallet;
 import br.edu.utfpr.pb.pw25s.Fynance.repository.TransactionRepository;
+import br.edu.utfpr.pb.pw25s.Fynance.repository.UserRepository;
 import br.edu.utfpr.pb.pw25s.Fynance.repository.WalletRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -29,6 +30,10 @@ public class TransactionControllerTest {
     TestRestTemplate testRestTemplate;
     @Autowired
     TransactionRepository transactionRepository;
+    @Autowired
+    WalletRepository walletRepository;
+    @Autowired
+    UserRepository userRepository;
 
     @BeforeEach()
     private void cleanup() {
@@ -54,11 +59,15 @@ public class TransactionControllerTest {
         user.setDisplayName("test-dislpay");
         user.setPassword("P4ssword");
 
+        userRepository.save(user);
+
         Wallet wallet = new Wallet();
         wallet.setName("Viagem pro Canada");
         wallet.setBalance(1000.00);
         wallet.setType("Investimento");
         wallet.setUser(user);
+
+        walletRepository.save(wallet);
 
         Transaction transaction = new Transaction();
         transaction.setName("Compra de BPAC11");

@@ -29,19 +29,6 @@ public class TransactionServiceImpl implements TransactionService {
     @Override
     public Transaction save(Transaction transaction) {
 
-        Wallet wallet = walletExists(transaction.getWallet().getId());
-        User user = userExists(transaction.getWallet().getUser().getUsername());
-
-        if (wallet == null && user == null ) {
-            transactionRepository.save(transaction);
-        } else if (wallet == null && user != null) {
-            transaction.setWallet(wallet);
-        } else if (wallet != null && user == null) {
-            wallet.setUser(user);
-        } else if (wallet != null && user != null) {
-            transaction.setWallet(wallet);
-        }
-
         return transactionRepository.save(transaction);
 
     }

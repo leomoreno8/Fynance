@@ -26,14 +26,6 @@ public class WalletServiceImpl implements WalletService {
     @Override
     public Wallet save(Wallet wallet) {
 
-        User user = userExists(wallet.getUser().getUsername());
-
-        if (user == null) {
-            walletRepository.save(wallet);
-        } else {
-            wallet.setUser(user);
-        }
-
         return walletRepository.save(wallet);
 
     }

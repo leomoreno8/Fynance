@@ -2,6 +2,7 @@ package br.edu.utfpr.pb.pw25s.Fynance;
 
 import br.edu.utfpr.pb.pw25s.Fynance.model.User;
 import br.edu.utfpr.pb.pw25s.Fynance.model.Wallet;
+import br.edu.utfpr.pb.pw25s.Fynance.repository.UserRepository;
 import br.edu.utfpr.pb.pw25s.Fynance.repository.WalletRepository;
 import org.junit.jupiter.api.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,6 +22,8 @@ public class WalletControllerTest {
     TestRestTemplate testRestTemplate;
     @Autowired
     WalletRepository walletRepository;
+    @Autowired
+    UserRepository userRepository;
 
     @BeforeEach()
     private void cleanup() {
@@ -45,6 +48,8 @@ public class WalletControllerTest {
         user.setEmail("test@test.com");
         user.setDisplayName("test-dislpay");
         user.setPassword("P4ssword");
+
+        userRepository.save(user);
 
         Wallet wallet = new Wallet();
         wallet.setName("Viagem pro Canada");

@@ -17,7 +17,7 @@ public class Transaction {
     private String name;
 
     @NotNull // Carteira que foi feita a transação
-    @ManyToOne(cascade=CascadeType.PERSIST)
+    @ManyToOne
     @JoinColumn(name = "wallet_id")
     private Wallet wallet;
 

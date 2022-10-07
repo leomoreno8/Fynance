@@ -22,7 +22,7 @@ public class Wallet {
     private String name;
 
     @NotNull // Dono da carteira
-    @ManyToOne(cascade=CascadeType.PERSIST)
+    @ManyToOne
     @JoinColumn(name = "user_id")
     private User user;
 
