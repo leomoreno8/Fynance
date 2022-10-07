@@ -27,7 +27,7 @@ public class TransactionDto {
     private Double valueTransaction;
 
     @NotNull
-    private char ES;
+    private String ES;
 
     @NotNull
     private String description;

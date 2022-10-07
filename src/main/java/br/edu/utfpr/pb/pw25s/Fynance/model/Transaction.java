@@ -29,7 +29,7 @@ public class Transaction {
 
     @NotNull // E = Entrada ---- S = Saída
     // Validação de só poder E ou S aqui futuramente
-    private char ES;
+    private String ES;
 
     @NotNull // Pode ser ''
     private String description;

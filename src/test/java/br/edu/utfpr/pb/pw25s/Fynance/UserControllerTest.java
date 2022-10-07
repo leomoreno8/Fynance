@@ -41,7 +41,7 @@ public class UserControllerTest {
         User user = createValidUser();
 
         ResponseEntity<Object> response =
-                testRestTemplate.postForEntity("/users", user, Object.class);
+                testRestTemplate.postForEntity("/users/save", user, Object.class);
 
         assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
     }
@@ -51,7 +51,7 @@ public class UserControllerTest {
         User user = createValidUser();
 
         ResponseEntity<Object> response =
-                testRestTemplate.postForEntity("/users", user, Object.class);
+                testRestTemplate.postForEntity("/users/save", user, Object.class);
         assertThat( userRepository.count() ).isEqualTo(1);
     }
 
@@ -60,7 +60,7 @@ public class UserControllerTest {
         User user = createValidUser();
 
         ResponseEntity<GenericResponse> response =
-                testRestTemplate.postForEntity("/users", user, GenericResponse.class);
+                testRestTemplate.postForEntity("/users/save", user, GenericResponse.class);
         assertThat( response.getBody().getMessage() ).isNotNull();
     }
 
@@ -68,7 +68,7 @@ public class UserControllerTest {
     @DisplayName("Post user when User is valid password is hashed in database")
     public void postUser_whenUserIsValid_passwordIsHashedInDatabase() {
         User user = createValidUser();
-        testRestTemplate.postForEntity("/users", user, Object.class);
+        testRestTemplate.postForEntity("/users/save", user, Object.class);
 
         List<User> userList = userRepository.findAll();
         User userDB = userList.get(0);
@@ -80,7 +80,7 @@ public class UserControllerTest {
         User user = createValidUser();
         user.setUsername(null);
         ResponseEntity<Object> response =
-                testRestTemplate.postForEntity("/users", user, Object.class);
+                testRestTemplate.postForEntity("/users/save", user, Object.class);
         assertThat(response.getStatusCode()).isEqualTo(HttpStatus.BAD_REQUEST);
     }
 
@@ -89,7 +89,7 @@ public class UserControllerTest {
         User user = createValidUser();
         user.setPassword(null);
         ResponseEntity<Object> response =
-                testRestTemplate.postForEntity("/users", user, Object.class);
+                testRestTemplate.postForEntity("/users/save", user, Object.class);
         assertThat(response.getStatusCode()).isEqualTo(HttpStatus.BAD_REQUEST);
     }
 
@@ -98,7 +98,7 @@ public class UserControllerTest {
         User user = createValidUser();
         user.setUsername("abc");
         ResponseEntity<Object> response =
-                testRestTemplate.postForEntity("/users", user, Object.class);
+                testRestTemplate.postForEntity("/users/save", user, Object.class);
         assertThat(response.getStatusCode()).isEqualTo(HttpStatus.BAD_REQUEST);
     }
 
@@ -110,7 +110,7 @@ public class UserControllerTest {
                         .collect(Collectors.joining())
         );
         ResponseEntity<Object> response =
-                testRestTemplate.postForEntity("/users", user, Object.class);
+                testRestTemplate.postForEntity("/users/save", user, Object.class);
         assertThat(response.getStatusCode()).isEqualTo(HttpStatus.BAD_REQUEST);
     }
 
@@ -119,7 +119,7 @@ public class UserControllerTest {
         User user = createValidUser();
         user.setPassword("password");
         ResponseEntity<Object> response =
-                testRestTemplate.postForEntity("/users", user, Object.class);
+                testRestTemplate.postForEntity("/users/save", user, Object.class);
         assertThat(response.getStatusCode()).isEqualTo(HttpStatus.BAD_REQUEST);
     }
 
@@ -127,16 +127,16 @@ public class UserControllerTest {
     public void postUser_whenUserIsInvalid_receiveApiError() {
         User user = new User();
         ResponseEntity<ApiError> response =
-                testRestTemplate.postForEntity("/users", user, ApiError.class);
+                testRestTemplate.postForEntity("/users/save", user, ApiError.class);
 
-        assertThat(response.getBody().getUrl()).isEqualTo("/users");
+        assertThat(response.getBody().getUrl()).isEqualTo("/users/save");
     }
 
     @Test
     public void postUser_whenUserIsInvalid_receiveApiErrorWithValidationErrors() {
         User user = new User();
         ResponseEntity<ApiError> response =
-                testRestTemplate.postForEntity("/users", user, ApiError.class);
+                testRestTemplate.postForEntity("/users/save", user, ApiError.class);
 
         assertThat(response.getBody().getValidationErrors().size()
         ).isEqualTo(4);
@@ -146,7 +146,7 @@ public class UserControllerTest {
     public void postUser_whenUserIsInvalid_receiveMessageOfNullUsername() {
         User user = new User();
         ResponseEntity<ApiError> response =
-                testRestTemplate.postForEntity("/users", user, ApiError.class);
+                testRestTemplate.postForEntity("/users/save", user, ApiError.class);
 
         Map<String, String> validationErrors = response.getBody().getValidationErrors();
 
@@ -159,7 +159,7 @@ public class UserControllerTest {
         userRepository.save(createValidUser());
         User user = createValidUser();
         ResponseEntity<Object> response =
-                testRestTemplate.postForEntity("/users", user, Object.class);
+                testRestTemplate.postForEntity("/users/save", user, Object.class);
         assertThat(response.getStatusCode())
                 .isEqualTo(HttpStatus.BAD_REQUEST);
     }

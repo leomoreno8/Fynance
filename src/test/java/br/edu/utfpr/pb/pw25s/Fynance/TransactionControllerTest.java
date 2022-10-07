@@ -41,7 +41,7 @@ public class TransactionControllerTest {
         Transaction transaction = createValidEntryTransaction();
 
         ResponseEntity<Object> response =
-                testRestTemplate.postForEntity("/transactions", transaction, Object.class);
+                testRestTemplate.postForEntity("/transactions/save", transaction, Object.class);
 
         assertThat(response.getStatusCode()).isEqualTo(HttpStatus.CREATED);
     }
@@ -65,7 +65,7 @@ public class TransactionControllerTest {
         transaction.setWallet(wallet);
         transaction.setDateTransaction(new Date());
         transaction.setValueTransaction(1300.00);
-        transaction.setES('E');
+        transaction.setES("E");
         transaction.setDescription("Compra de 10 lotes de BPAC11");
         transaction.setCategory("Ação");
         transaction.setFees(10.20);

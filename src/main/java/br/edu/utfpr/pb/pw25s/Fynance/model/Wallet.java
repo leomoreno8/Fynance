@@ -16,7 +16,7 @@ public class Wallet {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private long id;
 
     @NotNull // Obrigatório preencher. Não pode ser vazio.
     private String name;

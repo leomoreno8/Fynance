@@ -33,7 +33,7 @@ public class WalletControllerTest {
         Wallet wallet = createValidWallet();
 
         ResponseEntity<Object> response =
-                testRestTemplate.postForEntity("/wallets", wallet, Object.class);
+                testRestTemplate.postForEntity("/wallets/save", wallet, Object.class);
 
         assertThat(response.getStatusCode()).isEqualTo(HttpStatus.CREATED);
     }
