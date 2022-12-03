@@ -1,8 +1,8 @@
 import type { NextPage } from 'next'
 import Head from 'next/head'
-import Footer from '../components/Footer'
-import Login from '../components/Login'
-import styles from '../styles/Home.module.scss'
+import Footer from '../../components/Footer'
+import styles from '../../styles/Home.module.scss'
+import Signup from '../../components/Signup/index';
 
 const Home: NextPage = () => {
   return (
@@ -14,8 +14,8 @@ const Home: NextPage = () => {
       </Head>
 
       <main className={styles.main}>
-        <h1>LOGIN</h1>
-        <Login />
+        <h1>SIGN UP</h1>
+        <Signup />
       </main>
       <Footer />
     </div>

@@ -7,6 +7,8 @@ import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
+import org.springframework.web.servlet.config.annotation.CorsRegistry;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 @SpringBootApplication
 public class FynanceApplication {
@@ -20,4 +22,20 @@ public class FynanceApplication {
 		return new ModelMapper();
 	}
 
+	@Bean
+	public WebMvcConfigurer corsConfigurer() {
+		return new WebMvcConfigurer() {
+			@Override
+			public void addCorsMappings(CorsRegistry registry) {
+				registry.addMapping("/**")
+						.allowedOrigins("*")
+						.allowedMethods("GET","POST","PUT","PATCH","OPTIONS","DELETE")
+						.allowedHeaders("Authorization","x-xsrf-token",
+								"Access-Control-Allow-Headers", "Origin",
+								"Accept", "X-Requested-With", "Content-Type",
+								"Access-Control-Request-Method",
+								"Access-Control-Request-Headers", "Auth-Id-Token");
+			}
+		};
+	}
 }

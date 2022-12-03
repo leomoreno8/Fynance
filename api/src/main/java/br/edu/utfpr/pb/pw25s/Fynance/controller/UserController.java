@@ -16,7 +16,7 @@ public class UserController {
         this.userService = userService;
     }
 
-    @PostMapping("save")
+    @PostMapping("create")
     GenericResponse createUser(@RequestBody @Valid User user) {
         userService.save(user);
         return new GenericResponse("Registro salvo");
