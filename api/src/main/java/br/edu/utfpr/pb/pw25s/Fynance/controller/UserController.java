@@ -2,7 +2,10 @@ package br.edu.utfpr.pb.pw25s.Fynance.controller;
 
 import br.edu.utfpr.pb.pw25s.Fynance.model.User;
 import br.edu.utfpr.pb.pw25s.Fynance.service.UserService;
+import br.edu.utfpr.pb.pw25s.Fynance.service.AuthService;
 import br.edu.utfpr.pb.pw25s.Fynance.utils.GenericResponse;
+import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -12,8 +15,11 @@ import javax.validation.Valid;
 public class UserController {
     private final UserService userService;
 
-    public UserController(UserService userService) {
+    private final AuthService authService;
+
+    public UserController(UserService userService, AuthService authService) {
         this.userService = userService;
+        this.authService = authService;
     }
 
     @PostMapping("create")
@@ -26,6 +32,11 @@ public class UserController {
     GenericResponse updateUser(@PathVariable Long id, @RequestBody @Valid User user) {
         userService.update(id, user);
         return new GenericResponse("Registro atualizado");
+    }
+
+    @GetMapping("{user}")
+    public ResponseEntity<UserDetails> get(@PathVariable String user) {
+        return ResponseEntity.ok( authService.loadUserByUsername(user) );
     }
 
     @GetMapping

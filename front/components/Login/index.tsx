@@ -9,6 +9,8 @@ import { ToastContainer } from 'react-toastify'
 import ToastError from "../../components/ToastError/index"
 import Router from 'next/router';
 import jsCookie from 'js-cookie';
+import jwt_decode from 'jwt-decode';
+
 
 export default function Login() {
 
@@ -22,10 +24,20 @@ export default function Login() {
         password: values.password,
       })
 
+      
       if(login.data.error) {
         ToastError(login.data.error);
       } else {
+        let usernameText: {sub: string, exp: number} = jwt_decode(login.data.token);
+        let usernameSub = usernameText.sub;
+
+        let URLget = process.env.NEXT_PUBLIC_APIURL + "/users/" + usernameSub;
+
+        const userId = await Axios.get(URLget, {});
+    
         jsCookie.set('token', login.data.token);
+        jsCookie.set('username', usernameSub);
+        jsCookie.set('id', userId.data.id);
         Router.push('/menu');
       }
       

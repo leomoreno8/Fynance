@@ -6,6 +6,8 @@ import jsCookie from 'js-cookie';
 export default function Header() {
     async function logout() {
         jsCookie.remove("token");
+        jsCookie.remove("username");
+        jsCookie.remove("id");
         Router.push('/');
     }
     

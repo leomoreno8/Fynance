@@ -50,7 +50,8 @@ public class WebSecurity {
                 .and()
                 .authorizeRequests()
 
-                .antMatchers(HttpMethod.POST, "/users/**").permitAll()
+                .antMatchers(HttpMethod.POST, "/users/**", "/wallets/**").permitAll()
+                .antMatchers(HttpMethod.GET, "/users/**", "/wallets/**").permitAll()
                 .antMatchers( "/error/**").permitAll()
 
                 .antMatchers("/h2-console/**",

@@ -43,6 +43,14 @@
   font-size: 1.5rem;
 }
 
+.header_title {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  text-align: center;
+  gap: 1rem;
+}
+
 .code {
   background: #fafafa;
   border-radius: 5px;
