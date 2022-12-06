@@ -11,12 +11,16 @@ import Router from 'next/router';
 import jsCookie from 'js-cookie';
 import ToastSuccess from "../ToastSuccess/index"
 
+type EditWalletProps = {
+  id: number;
+  name: string;
+}
 
-export default function AddWallet() {
+export default function EditWallet(props: EditWalletProps) {
 
   async function handleClickCreateWallet(values: { name: string; type: string; balance: number; bank: number; agency: number; number: number; }) {
 
-    let URL = process.env.NEXT_PUBLIC_APIURL + "/wallets/save";
+    let URL = process.env.NEXT_PUBLIC_APIURL + "/wallets/update";
     console.log(URL)
 
     try {
@@ -67,6 +71,7 @@ export default function AddWallet() {
       <div className={styles.add_wallet_container}>
         {/* LOGIN BOX  */}
         <div className={styles.login_box}>
+          <h2>{props.name}</h2>
           <Formik
             // initialValues={{'name': '', 'type': '', 'balance': '', 'bank': '', 'agency': '', 'number': ''}}
             onSubmit={handleClickCreateWallet}
@@ -145,7 +150,7 @@ export default function AddWallet() {
 
               <div className={styles.button_login_box}> 
                 <button type="submit">
-                  <ShadowButton text='CREATE'/>
+                  <ShadowButton text='EDIT'/>
                 </button>
               </div>
             </Form>

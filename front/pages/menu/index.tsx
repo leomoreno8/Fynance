@@ -5,7 +5,7 @@ import Footer from '../../components/Footer'
 import styles from '../../styles/Home.module.scss'
 import jsCookie from 'js-cookie';
 import Router from 'next/router';
-import Products from '../../components/Wallets'
+import Wallets from '../../components/Wallets'
 import Header from '../../components/Header'
 import IconButton from '../../components/IconButton'
 import AddWallet from './../../components/AddWallet/index';
@@ -43,7 +43,6 @@ const Home: NextPage = () => {
 					<main className={styles.main}>
 						<Header />
 						<div className={styles.header_title}>
-							<h1>WALLET</h1>
 							{!addWallet && 
 								<>
 									<a onClick={() => setAddWallet(true)}>
@@ -57,11 +56,13 @@ const Home: NextPage = () => {
 										<IconButton type='add'/>
 									</a>		
 								</>
-							}
-													
+							}						
+							<h1>WALLET</h1>
 						</div>
-						{addWallet && <AddWallet /> }
-						<Products />
+						<div className={styles.page_content}>
+							{addWallet && <AddWallet /> }
+							<Wallets />
+						</div>
 					</main>
 					<Footer />        
 				</>
