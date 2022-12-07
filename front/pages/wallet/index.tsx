@@ -10,7 +10,7 @@ import Header from '../../components/Header'
 import IconButton from '../../components/IconButton'
 import AddWallet from './../../components/AddWallet/index';
 
-const Menu: NextPage = () => {
+const Wallet: NextPage = () => {
 
 	function loggedFunction() {
 		const cookie = jsCookie.get();
@@ -71,4 +71,4 @@ const Menu: NextPage = () => {
 	)
 }
 
-export default Menu
+export default Wallet

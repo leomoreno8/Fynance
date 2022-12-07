@@ -18,10 +18,9 @@ type EditWalletProps = {
 
 export default function EditWallet(props: EditWalletProps) {
 
-  async function handleClickCreateWallet(values: { name: string; type: string; balance: number; bank: number; agency: number; number: number; }) {
+  async function handleClickEditWallet(values: { name: string; type: string; balance: number; bank: number; agency: number; number: number; }) {
 
-    let URL = process.env.NEXT_PUBLIC_APIURL + "/wallets/update";
-    console.log(URL)
+    let URL = process.env.NEXT_PUBLIC_APIURL + "/wallets/update/" + props.id;
 
     try {
       const createWallet = await Axios.post(URL, {
@@ -74,7 +73,7 @@ export default function EditWallet(props: EditWalletProps) {
           <h2>{props.name}</h2>
           <Formik
             // initialValues={{'name': '', 'type': '', 'balance': '', 'bank': '', 'agency': '', 'number': ''}}
-            onSubmit={handleClickCreateWallet}
+            onSubmit={handleClickEditWallet}
             validationSchema={validationCreateWallet} initialValues={{
               name: '',
               type: '',

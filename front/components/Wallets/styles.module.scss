@@ -93,6 +93,11 @@
   transition: opacity 500ms, transform 500ms;
 }
 
+.remove_modal {
+  z-index: 1;
+  position: absolute;
+}
+
 .tooltip:before {
   content: '';
   position: absolute;
