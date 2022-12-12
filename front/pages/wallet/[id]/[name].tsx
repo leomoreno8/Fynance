@@ -1,16 +1,24 @@
 import type { NextPage } from 'next'
 import Head from 'next/head'
 import { useEffect, useState } from 'react'
-import Footer from '../../components/Footer'
-import styles from '../../styles/Home.module.scss'
+import Footer from '../../../components/Footer'
+import styles from '../../../styles/Home.module.scss'
 import jsCookie from 'js-cookie';
-import Router from 'next/router';
-import Wallets from '../../components/Wallets'
-import Header from '../../components/Header'
-import IconButton from '../../components/IconButton'
-import AddWallet from './../../components/AddWallet/index';
+import Router, {useRouter} from 'next/router';
+import Wallets from '../../../components/Wallets'
+import Header from '../../../components/Header'
+import IconButton from '../../../components/IconButton'
+import AddWallet from '../../../components/AddWallet/index';
+import Transactions from '../../../components/Transaction'
+import AddTransaction from '../../../components/AddTransaction'
+
 
 const Wallet: NextPage = () => {
+
+	const router = useRouter()
+	const { id } = router.query
+	const { name } = router.query
+
 
 	function loggedFunction() {
 		const cookie = jsCookie.get();
@@ -24,7 +32,7 @@ const Wallet: NextPage = () => {
 
 	const [logged, setLogged] = useState(false);
 	
-	const [addWallet, setAddWallet] = useState(false);
+	const [addTransaction, setAddTransaction] = useState(false);
 
 	useEffect(() => {
 		loggedFunction();
@@ -41,27 +49,29 @@ const Wallet: NextPage = () => {
 			{logged && (
 				<>
 					<main className={styles.main}>
-						<Header />
+						<Header page='wallet' />
 						<div className={styles.header_title}>
-							{!addWallet && 
+							{!addTransaction && 
 								<>
-									<a onClick={() => setAddWallet(true)}>
+									<a onClick={() => setAddTransaction(true)}>
 										<IconButton type='add'/>
 									</a>		
 								</>
 							}	
-							{addWallet && 
+							{addTransaction && 
 								<>
-									<a onClick={() => setAddWallet(false)}>
+									<a onClick={() => setAddTransaction(false)}>
 										<IconButton type='add'/>
 									</a>		
 								</>
 							}						
-							<h1>WALLET</h1>
+							<h1>{name}</h1>
+
 						</div>
 						<div className={styles.page_content}>
-							{addWallet && <AddWallet /> }
-							<Wallets />
+							{addTransaction && <AddTransaction /> }
+							{/* <Wallets0 /> */}
+							<Transactions />
 						</div>
 					</main>
 					<Footer />        

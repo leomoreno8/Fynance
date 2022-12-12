@@ -28,8 +28,7 @@ public class Transaction {
     private Double valueTransaction;
 
     @NotNull // E = Entrada ---- S = Saída
-    // Validação de só poder E ou S aqui futuramente
-    private String ES;
+    private String es;
 
     @NotNull // Pode ser ''
     private String description;

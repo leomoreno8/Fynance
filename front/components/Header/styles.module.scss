@@ -28,3 +28,14 @@
     color: $white;
     transition: .5s;
 }
+
+.button_voltar {
+    position: absolute;
+    left: 30px;
+    cursor: pointer;
+}
+
+.button_voltar:hover{
+    color: $purple;
+    transition: 1s;
+}

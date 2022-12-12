@@ -40,7 +40,7 @@ public class TransactionServiceImpl implements TransactionService {
         transactionToUpdate.setDateTransaction(transaction.getDateTransaction());
         transactionToUpdate.setValueTransaction(transaction.getValueTransaction());
         transactionToUpdate.setCategory(transaction.getCategory());
-        transactionToUpdate.setES(transaction.getES());
+        transactionToUpdate.setEs(transaction.getEs());
         transactionToUpdate.setDescription(transaction.getDescription());
         transactionToUpdate.setFees(transaction.getFees());
         transactionToUpdate.setTotal(transaction.getTotal());

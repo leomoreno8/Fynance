@@ -41,7 +41,7 @@ const Menu: NextPage = () => {
 			{logged && (
 				<>
 					<main className={styles.main}>
-						<Header />
+						<Header page='menu'/>
 						<div className={styles.header_title}>
 							{!addWallet && 
 								<>
@@ -57,7 +57,7 @@ const Menu: NextPage = () => {
 									</a>		
 								</>
 							}						
-							<h1>WALLET</h1>
+							<h1>WALLETS</h1>
 						</div>
 						<div className={styles.page_content}>
 							{addWallet && <AddWallet /> }
