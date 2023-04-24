@@ -6,9 +6,28 @@
 ### Casos de usos de testes
 - Cadastro de Usuário;
 - Login de Usuário;
+- Logout de Usuário;
+- Criar Wallet;
+- Editar Wallet;
+- Remover Wallet;
+- Listar Wallets;
+
+### Descrições
+- Teste de interfaces
+- Testes de componentes
 
 ## Backend
 
 ### Casos de usos de testes
 - Cadastro de Usuário;
 - Login de Usuário;
+- Logout de Usuário;
+- Criar Wallet;
+- Editar Wallet;
+- Remover Wallet;
+- Listar Wallets;
+
+### Descrições
+- Validar body
+- Validar resposta
+- Validar lógica/regra de negócio
